@@ -1,0 +1,804 @@
+.home {
+  width: 100%;
+  max-width: 100%;
+}
+
+.hero {
+  background: linear-gradient(rgba(10, 30, 56, 0.85), rgba(30, 58, 138, 0.85)),
+    url("https://images.unsplash.com/photo-1559526324-4b87b5e36e44?ixlib=rb-4.0.3?auto=format&fit=crop&w=1920&q=80");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: white;
+  padding: 150px 20px;
+  text-align: center;
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero p {
+  font-size: 1.4rem;
+  margin-bottom: 2.5rem;
+  opacity: 0.9;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.cta-button {
+  padding: 1.2rem 3rem;
+  font-size: 1.2rem;
+  background-color: white;
+  color: #0a1e38;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  background-color: #f8f9fa;
+}
+
+.features {
+  padding: 80px 20px;
+  background-color: #f8f9fa;
+}
+
+.features h2 {
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #0a1e38;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.project-card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+}
+
+.project-image {
+  height: 200px;
+  background-color: #ddd;
+  background-size: cover;
+  background-position: center;
+}
+
+.project-info {
+  padding: 1.5rem;
+}
+
+.project-info h3 {
+  margin-bottom: 0.5rem;
+  color: #0a1e38;
+}
+
+.project-info p {
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.project-button {
+  padding: 0.5rem 1rem;
+  background-color: #0a1e38;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.project-button:hover {
+  background-color: #1e3a8a;
+}
+
+.about-section {
+  padding: 80px 20px;
+  background-color: white;
+}
+
+.about-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.about-content h2 {
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #0a1e38;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.benefit-card {
+  text-align: center;
+  padding: 2rem;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  transition: transform 0.3s ease;
+}
+
+.benefit-card:hover {
+  transform: translateY(-5px);
+}
+
+.benefit-card i {
+  font-size: 2.5rem;
+  color: #0a1e38;
+  margin-bottom: 1rem;
+}
+
+.benefit-card h3 {
+  margin-bottom: 1rem;
+  color: #0a1e38;
+}
+
+.benefit-card p {
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 100px 20px;
+    min-height: 60vh;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+  }
+
+  .cta-button {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+  }
+
+  .project-grid {
+    grid-template-columns: 1fr;
+    padding: 0 20px;
+  }
+
+  .benefits-grid {
+    grid-template-columns: 1fr;
+    padding: 0 20px;
+  }
+}
+
+.investment-section {
+  padding: 60px 20px;
+  background-color: #f8f9fa;
+}
+
+.investment-header {
+  max-width: 1200px;
+  margin: 0 auto 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sort-select {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+  color: #0a1e38;
+  cursor: pointer;
+}
+
+.investment-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.investment-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 1.5rem;
+}
+
+.investment-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.card-header {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  align-items: flex-start;
+}
+
+.company-logo {
+  width: 120px;
+  height: 120px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.company-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.company-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.company-info h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+}
+
+.company-description {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.4;
+}
+
+.funding-progress {
+  margin-bottom: 1.5rem;
+}
+
+.progress-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.progress-percentage {
+  font-weight: 600;
+  color: #02a95c;
+  font-size: 1.1rem;
+}
+
+.target-amount {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.progress-bar {
+  height: 6px;
+  background-color: #f0f0f0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #02a95c;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.investment-meta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem 0;
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.meta-label {
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 0.25rem;
+}
+
+.meta-value {
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.investment-tags {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.eis-tag {
+  background-color: #e8f5ff;
+  color: #0066cc;
+}
+
+.country-tag {
+  background-color: #f5f5f5;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.country-flag {
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+}
+
+.time-remaining {
+  text-align: right;
+}
+
+.days-left {
+  color: #ff4444;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Add responsive styles */
+@media (max-width: 768px) {
+  .investment-card {
+    padding: 1rem;
+  }
+
+  .company-logo {
+    width: 100px;
+    height: 100px;
+  }
+
+  .investment-meta {
+    gap: 0.5rem;
+  }
+
+  .card-header {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .investment-header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .investment-grid {
+    grid-template-columns: 1fr;
+    padding: 0;
+  }
+
+  .investment-stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.scroll-indicator {
+  text-align: center;
+  margin-top: 3rem;
+  padding-bottom: 2rem;
+  position: relative;
+}
+
+.scroll-button {
+  background: #0a1e38;
+  border: none;
+  color: white;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.scroll-button i {
+  font-size: 1.5rem;
+  animation: floatArrow 2s ease-in-out infinite;
+}
+
+.scroll-button:hover {
+  transform: translateY(2px);
+  background-color: #1e3a8a;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes floatArrow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+/* Add a subtle gradient overlay above the button */
+.scroll-indicator::before {
+  content: "";
+  position: absolute;
+  top: -50px;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background: linear-gradient(to bottom, transparent, rgba(248, 249, 250, 0.9));
+  pointer-events: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1200px) {
+  .investment-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .investment-grid {
+    grid-template-columns: 1fr;
+    padding: 0 15px;
+  }
+}
+
+/* Add styles for image loading */
+.investment-image.loading {
+  animation: shimmer 1.5s infinite;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.video-section {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  margin-top: 4rem;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.background-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+}
+
+.video-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: rgba(10, 30, 56, 0.7); /* Dark overlay */
+  color: white;
+  padding: 2rem;
+}
+
+.video-content h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.video-content p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.video-cta {
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  background-color: #02a95c;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.video-cta:hover {
+  background-color: #028f4c;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .video-section {
+    height: 400px;
+  }
+
+  .video-content h2 {
+    font-size: 2rem;
+  }
+
+  .video-content p {
+    font-size: 1rem;
+  }
+
+  .video-cta {
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+  }
+}
+
+.card-actions {
+  display: flex;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.invest-button,
+.view-more-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex: 1;
+}
+
+.invest-button {
+  background-color: #02a95c;
+  color: white;
+}
+
+.invest-button:hover {
+  background-color: #028f4c;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(2, 169, 92, 0.2);
+}
+
+.view-more-button {
+  background-color: #f8f9fa;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.view-more-button:hover {
+  background-color: #e9ecef;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.invest-button i,
+.view-more-button i {
+  font-size: 1rem;
+}
+
+/* Update responsive styles */
+@media (max-width: 768px) {
+  .card-actions {
+    flex-direction: column;
+  }
+
+  .invest-button,
+  .view-more-button {
+    width: 100%;
+  }
+}
+
+/* Add hover effect for the entire card */
+.investment-card {
+  cursor: pointer;
+}
+
+.investment-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Add transition for smooth animations */
+.investment-card {
+  transition: all 0.3s ease;
+}
+
+/* Add focus styles for accessibility */
+.invest-button:focus,
+.view-more-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(2, 169, 92, 0.2);
+}
+
+.featured-section,
+.recent-section {
+  padding: 4rem 0;
+  background: #f8f9fa;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.featured-grid,
+.recent-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-header h2 {
+  color: #0a1e38;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.section-header p {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .featured-grid,
+  .recent-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.featured-projects {
+  padding: 4rem 1rem;
+  background: #f8f9fa;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-header h2 {
+  font-size: 2rem;
+  color: #0a1e38;
+  margin-bottom: 0.75rem;
+}
+
+.section-header p {
+  color: #666;
+  font-size: 1rem;
+}
+
+.featured-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 1200px) {
+  .featured-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .featured-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-projects {
+    padding: 2rem 1rem;
+  }
+
+  .section-header h2 {
+    font-size: 1.75rem;
+  }
+}

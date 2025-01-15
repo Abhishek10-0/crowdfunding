@@ -1,0 +1,560 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 2rem;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: 64px;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-logo {
+  text-decoration: none;
+  color: #02a95c;
+  font-size: 1.5rem;
+  font-weight: 700;
+  transition: opacity 0.2s ease;
+}
+
+.nav-logo:hover {
+  opacity: 0.8;
+}
+
+.search-container {
+  position: relative;
+}
+
+.search-input {
+  padding: 0.75rem 1rem;
+  padding-right: 2.5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  background-color: #f5f5f5;
+  color: #333;
+  font-size: 0.9rem;
+  width: 200px;
+  transition: all 0.2s ease;
+}
+
+.search-input::placeholder {
+  color: #666;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #02a95c;
+  background-color: white;
+  box-shadow: 0 0 0 3px rgba(2, 169, 92, 0.1);
+  width: 250px;
+}
+
+.search-button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  padding: 0;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.nav-item {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+  position: relative;
+}
+
+.nav-item::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #02a95c;
+  transition: width 0.3s ease;
+}
+
+.nav-item:hover::after,
+.nav-item.active::after {
+  width: 100%;
+}
+
+.nav-item:hover {
+  color: #02a95c;
+  background-color: rgba(2, 169, 92, 0.05);
+}
+
+.nav-item.active {
+  color: #02a95c;
+  background-color: rgba(2, 169, 92, 0.1);
+}
+
+.nav-dropdown {
+  position: relative;
+}
+
+.dropdown-trigger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.dropdown-trigger::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #02a95c;
+  transition: width 0.3s ease;
+}
+
+.dropdown-trigger:hover::after,
+.dropdown-trigger.active::after {
+  width: 100%;
+}
+
+.dropdown-content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  min-width: 280px;
+  max-height: 400px;
+  overflow-y: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
+  z-index: 1000;
+  scrollbar-width: thin;
+  scrollbar-color: #02a95c #f0f0f0;
+}
+
+.dropdown-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dropdown-content::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 3px;
+}
+
+.dropdown-content::-webkit-scrollbar-thumb {
+  background: #02a95c;
+  border-radius: 3px;
+}
+
+.dropdown-content::-webkit-scrollbar-thumb:hover {
+  background: #028f4c;
+}
+
+.dropdown-content {
+  scroll-behavior: smooth;
+}
+
+.dropdown-content::before,
+.dropdown-content::after {
+  content: "";
+  position: sticky;
+  left: 0;
+  right: 0;
+  height: 20px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.dropdown-content::before {
+  top: 0;
+  background: linear-gradient(to bottom, white, transparent);
+}
+
+.dropdown-content::after {
+  bottom: 0;
+  background: linear-gradient(to top, white, transparent);
+}
+
+.dropdown-item {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: #333;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.dropdown-item::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background-color: rgba(2, 169, 92, 0.1);
+  transition: width 0.3s ease;
+  z-index: -1;
+}
+
+.dropdown-item:hover::after,
+.dropdown-item.active::after {
+  width: 100%;
+}
+
+.dropdown-item:hover {
+  background-color: rgba(2, 169, 92, 0.05);
+  color: #02a95c;
+}
+
+.sign-in {
+  color: #02a95c;
+}
+
+.nav-item[href="/signout"]:hover {
+  color: #d32f2f;
+}
+
+.nav-item[href="/signout"]::after {
+  background-color: #d32f2f;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0.75rem 1rem;
+  }
+
+  .nav-left {
+    flex-grow: 1;
+  }
+
+  .search-container {
+    display: none;
+  }
+
+  .nav-menu {
+    display: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .search-input {
+    width: 150px;
+  }
+
+  .search-input:focus {
+    width: 200px;
+  }
+
+  .nav-item {
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+/* Add these styles for active states */
+.nav-item.active {
+  color: #02a95c;
+  background-color: rgba(2, 169, 92, 0.1);
+}
+
+.dropdown-trigger.active {
+  color: #02a95c;
+}
+
+.dropdown-item.active {
+  background-color: rgba(2, 169, 92, 0.1);
+  color: #02a95c;
+}
+
+/* Special styling for Sign In */
+.nav-item.sign-in {
+  color: #02a95c;
+}
+
+.nav-item.sign-in:hover {
+  background-color: rgba(2, 169, 92, 0.1);
+}
+
+/* Special styling for Sign Out */
+.nav-item[href="/signout"]:hover {
+  color: #d32f2f;
+}
+
+.nav-item[href="/signout"]::after {
+  background-color: #d32f2f;
+}
+
+/* Add these styles */
+.create-project-btn {
+  background-color: #02a95c;
+  color: white !important;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.create-project-btn:hover {
+  background-color: #028f4c;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(2, 169, 92, 0.2);
+}
+
+.create-project-btn i {
+  font-size: 0.9rem;
+}
+
+.create-project-btn::after {
+  display: none;
+}
+
+/* Update media query */
+@media (max-width: 768px) {
+  .nav-menu {
+    display: none;
+  }
+}
+
+/* Add these new styles */
+.category-group {
+  border-bottom: 1px solid #eee;
+}
+
+.category-group:last-child {
+  border-bottom: none;
+}
+
+.category-main {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.category-main:hover {
+  background-color: #f8f9fa;
+}
+
+.category-main i {
+  margin-right: 0.75rem;
+  width: 20px;
+  color: #02a95c;
+}
+
+.subcategories {
+  padding-left: 2.5rem;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  margin: 0 0.5rem 0.5rem;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.subcategory {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.subcategory:hover {
+  color: #02a95c;
+  background-color: #f0f0f0;
+}
+
+/* Update existing styles */
+.nav-dropdown {
+  position: relative;
+}
+
+.dropdown-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dropdown-trigger i {
+  font-size: 0.8rem;
+  transition: transform 0.2s;
+}
+
+.nav-dropdown:hover .dropdown-trigger i {
+  transform: rotate(180deg);
+}
+
+/* Add hover effect for better visual feedback */
+.category-main:hover + .subcategories {
+  background-color: #f0f0f0;
+}
+
+/* Add transition for smooth expansion */
+.category-group {
+  transition: all 0.3s ease;
+}
+
+/* Add loading indicator styles */
+.dropdown-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  color: #666;
+}
+
+.dropdown-loading i {
+  margin-right: 0.5rem;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Add these styles */
+.sign-out-btn {
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.sign-out-btn:hover {
+  color: #d32f2f;
+}
+
+.create-project-btn {
+  background-color: #02a95c;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.create-project-btn:hover {
+  background-color: #028f4c;
+  transform: translateY(-2px);
+}
+
+.create-project-btn i {
+  font-size: 0.9rem;
+}
+
+/* Add these new styles */
+.auth-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: 1rem;
+  border-left: 1px solid #eee;
+  padding-left: 1rem;
+}
+
+.sign-in-btn,
+.sign-out-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.sign-in-btn {
+  background-color: #02a95c;
+  color: white !important;
+}
+
+.sign-in-btn:hover {
+  background-color: #028f4c;
+  transform: translateY(-2px);
+}
+
+.sign-out-btn {
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+}
+
+.sign-out-btn:hover {
+  color: #d32f2f;
+  background-color: rgba(211, 47, 47, 0.1);
+}
+
+.create-project-btn {
+  background-color: #02a95c;
+  color: white !important;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.create-project-btn:hover {
+  background-color: #028f4c;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(2, 169, 92, 0.2);
+}
+
+.create-project-btn i,
+.sign-in-btn i,
+.sign-out-btn i {
+  font-size: 0.9rem;
+}
+
+/* Update responsive styles */
+@media (max-width: 768px) {
+  .auth-buttons {
+    margin-left: 0;
+    border-left: none;
+    padding-left: 0;
+    width: 100%;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+}
