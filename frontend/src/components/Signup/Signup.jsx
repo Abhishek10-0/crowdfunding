@@ -15,7 +15,7 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Send data to backend API endpoint (no database logic here)
+      
       const response = await axios.post("http://localhost:5001/api/users/signup", formData);
       alert("Registration successful!");
       console.log(response.data);
