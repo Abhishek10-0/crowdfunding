@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const multer = require('multer'); // For file uploads
+const path = require('path'); // To handle file paths
 const User = require('./models/User'); // Import User model
 const bcrypt = require('bcryptjs'); // For password hashing
 const jwt = require('jsonwebtoken'); // For generating tokens
@@ -10,18 +12,21 @@ require('dotenv').config(); // For environment variables
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-// Add this middleware to enable CORS
+// Middleware for CORS
 app.use(cors({
   origin: 'http://localhost:5173', // Allow this specific origin (React frontend)
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true // If you want to allow cookies
 }));
 
+// Middleware for parsing JSON data
+app.use(bodyParser.json());
+
+// Serve static files (for uploaded images)
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 // MongoDB URI
 const mongoURI = process.env.MONGO_URI || 'your-default-mongodb-uri';
-
-// Middleware
-app.use(bodyParser.json()); // Parse incoming JSON data
 
 // Connect to MongoDB
 mongoose
@@ -47,8 +52,7 @@ app.post('/api/users/signup', async (req, res) => {
   }
 });
 
-// POST: User Sign-In (Updated Code)
-
+// POST: User Sign-In (Existing Code)
 app.post('/api/users/signin', async (req, res) => {
   console.log('Sign-In request received');
   const { email, password } = req.body;
@@ -64,7 +68,7 @@ app.post('/api/users/signin', async (req, res) => {
     }
 
     // Validate password using the comparePassword method
-    const isPasswordValid = await user.comparePassword(password);
+    const isPasswordValid = await bcrypt.compare(password, user.password);
     console.log('Password validation:', isPasswordValid); // Check password comparison result
 
     if (!isPasswordValid) {
@@ -85,8 +89,41 @@ app.post('/api/users/signin', async (req, res) => {
   }
 });
 
+// Multer configuration for file uploads
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/'); // Save files to the 'uploads' folder
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`); // Unique filename
+  },
+});
 
+const upload = multer({ storage });
 
+// Import Project model
+const Project = require('./models/Project'); // Ensure this model exists
+
+// POST: Create a new project with an image
+app.post('/api/projects', upload.single('image'), async (req, res) => {
+  try {
+    const { name, duration, description, goal } = req.body;
+    const image = req.file ? `/uploads/${req.file.filename}` : null;
+
+    if (!name || !duration || !description || !goal || !image) {
+      return res.status(400).json({ message: 'All fields, including an image, are required.' });
+    }
+
+    // Create a new project
+    const newProject = new Project({ name, duration, description, goal, image });
+    const savedProject = await newProject.save();
+
+    res.status(201).json({ message: 'Project created successfully!', project: savedProject });
+  } catch (error) {
+    console.error('Error creating project:', error.message);
+    res.status(500).json({ message: 'Failed to create project.', error: error.message });
+  }
+});
 
 // Health check route
 app.get('/', (req, res) => {

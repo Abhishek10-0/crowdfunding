@@ -1,4 +1,7 @@
-// Sign-In Function
+const User = require('../models/User');
+const jwt = require('jsonwebtoken');
+
+
 const signIn = async (req, res) => {
   const { email, password } = req.body;
 
@@ -9,10 +12,10 @@ const signIn = async (req, res) => {
       return res.status(404).json({ message: 'User not found!' });
     }
 
-    // Use the comparePassword method
+   
     const isPasswordValid = await user.comparePassword(password);
     if (!isPasswordValid) {
-      return res.status(401).json({ message: 'Invalid credentials!' });
+      return res.status(401).json({ message: 'Invalid Password' });
     }
 
     // Generate a JWT token
@@ -32,3 +35,5 @@ const signIn = async (req, res) => {
     res.status(500).json({ message: 'Something went wrong!' });
   }
 };
+
+module.exports = { signIn };

@@ -10,4 +10,7 @@ export default defineConfig({
     assetsDir: "assets",
     sourcemap: true,
   },
+  optimizeDeps: {
+    include: ['jwt-decode']
+  }
 });

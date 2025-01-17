@@ -20,13 +20,14 @@ function App() {
           <Nav />
           <main className="main-content">
             <Routes>
-              <Route path="/crowdfunding/" element={<Home />} />
-              <Route path="/crowdfunding/about" element={<About />} />
-              <Route path="/crowdfunding/create-project" element={<CreateProject />} />
-              <Route path="/crowdfunding/payment" element={<Payment />} />
-              <Route path="/crowdfunding/category/:category" element={<Categories />} />
-              <Route path="/crowdfunding/signup" element={<SignUp />} /> 
-              <Route path="/crowdfunding/signin" element={<SignIn />} /> 
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/create-project" element={<CreateProject />} />
+              <Route path="/payment" element={<Payment />} />
+              <Route path="/category/:category" element={<Categories />} />
+              <Route path="/signup" element={<SignUp />} /> 
+              <Route path="/signin" element={<SignIn />} /> 
+              <Route path="/create-project" element={<CreateProject />} /> 
             </Routes>
           </main>
           <WhyInvestSection />

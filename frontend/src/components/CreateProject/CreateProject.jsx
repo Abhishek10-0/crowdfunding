@@ -1,179 +1,112 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useProjects } from "../../context/ProjectContext";
-import { getAllCategories, getCategoryIcon } from "../../config/categories";
-import "./CreateProject.css";
+import React, { useState } from 'react';
+import axios from 'axios';
 
 const CreateProject = () => {
-  const navigate = useNavigate();
-  const { addProject } = useProjects();
-  const [projectData, setProjectData] = useState({
-    name: "",
-    description: "",
-    category: "",
-    target: "",
-    minInvestment: "",
-    duration: "",
-    image: null,
+  const [formData, setFormData] = useState({
+    name: '',
+    duration: '',
+    description: '',
+    goal: '',
   });
-  const [imagePreview, setImagePreview] = useState(null);
-
-  const allCategories = getAllCategories();
+  const [image, setImage] = useState(null);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setProjectData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      // Create a preview URL for the selected image
-      const previewUrl = URL.createObjectURL(file);
-      setImagePreview(previewUrl);
-      setProjectData((prev) => ({
-        ...prev,
-        image: file,
-      }));
+  const handleFileChange = (e) => {
+    setImage(e.target.files[0]);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formDataToSend = new FormData();
+    formDataToSend.append('name', formData.name);
+    formDataToSend.append('duration', formData.duration);
+    formDataToSend.append('description', formData.description);
+    formDataToSend.append('goal', formData.goal);
+    formDataToSend.append('image', image);
+
+    try {
+      const response = await axios.post('http://localhost:5001/api/projects', formDataToSend, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+
+      alert('Project created successfully!');
+      console.log('Response:', response.data);
+    } catch (error) {
+      console.error('Error creating project:', error.message);
+      alert('Failed to create project.');
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newProject = {
-      ...projectData,
-      icon: getCategoryIcon(projectData.category),
-      daysLeft: parseInt(projectData.duration) || 30,
-      image: imagePreview, // Use the preview URL for now
-    };
-    addProject(newProject);
-    navigate("/");
-  };
-
   return (
-    <div className="create-project">
-      <div className="form-container">
-        <h2>Create New Project</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="name">Project Name</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={projectData.name}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="description">Description</label>
-            <textarea
-              id="description"
-              name="description"
-              value={projectData.description}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="category">Category</label>
-            <select
-              id="category"
-              name="category"
-              value={projectData.category}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select a category</option>
-              {allCategories.map((category) => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="form-row">
-            <div className="form-group">
-              <label htmlFor="target">Target Amount (£)</label>
-              <input
-                type="number"
-                id="target"
-                name="target"
-                value={projectData.target}
-                onChange={handleChange}
-                min="1000"
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="minInvestment">Minimum Investment (£)</label>
-              <input
-                type="number"
-                id="minInvestment"
-                name="minInvestment"
-                value={projectData.minInvestment}
-                onChange={handleChange}
-                min="100"
-                required
-              />
-            </div>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="duration">Duration (Days)</label>
-            <input
-              type="number"
-              id="duration"
-              name="duration"
-              value={projectData.duration}
-              onChange={handleChange}
-              min="1"
-              max="365"
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="image">Project Image</label>
-            <input
-              type="file"
-              id="image"
-              name="image"
-              onChange={handleImageChange}
-              accept="image/*"
-              required
-              className="file-input"
-            />
-            {imagePreview && (
-              <div className="image-preview">
-                <img src={imagePreview} alt="Project preview" />
-              </div>
-            )}
-          </div>
-
-          <div className="form-actions">
-            <button type="submit" className="submit-button">
-              Create Project
-            </button>
-            <button
-              type="button"
-              className="cancel-button"
-              onClick={() => navigate("/")}
-            >
-              Cancel
-            </button>
-          </div>
-        </form>
+    <form
+      onSubmit={handleSubmit}
+      encType="multipart/form-data"
+      className="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg space-y-4"
+    >
+      <div>
+        <label className="block text-sm font-medium text-gray-700">Project Name:</label>
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+        />
       </div>
-    </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700">Duration (days):</label>
+        <input
+          type="number"
+          name="duration"
+          value={formData.duration}
+          onChange={handleChange}
+          required
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+        />
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700">Description:</label>
+        <textarea
+          name="description"
+          value={formData.description}
+          onChange={handleChange}
+          required
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+        />
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700">Goal Amount:</label>
+        <input
+          type="number"
+          name="goal"
+          value={formData.goal}
+          onChange={handleChange}
+          required
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+        />
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700">Upload Image:</label>
+        <input
+          type="file"
+          onChange={handleFileChange}
+          accept="image/*"
+          required
+          className="mt-1 block w-full text-gray-600 border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+        />
+      </div>
+      <button
+        type="submit"
+        className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+      >
+        Create Project
+      </button>
+    </form>
   );
 };
 

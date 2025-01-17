@@ -8,6 +8,8 @@ import {
 } from "../../utils/projectUtils";
 import ProjectSection from "../common/ProjectSection";
 import FeaturedProjectCard from "../common/FeaturedProjectCard";
+import SignIn from "../Signin/Signin";
+import SignUp from "../Signup/Signup";
 
 const Home = () => {
   const { projects } = useProjects();
@@ -25,7 +27,7 @@ const Home = () => {
           </Tooltip>
           <p>Discover and support innovative startups</p>
           <Tooltip text="Begin your investment journey">
-            <button className="cta-button">Start Investing</button>
+            <button onClick={SignUp} className="cta-button">Start Investing</button>
           </Tooltip>
         </div>
       </section>

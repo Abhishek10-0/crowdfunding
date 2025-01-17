@@ -4,6 +4,7 @@ import { useAuth } from "../../context/AuthContext";
 import ConfirmDialog from "../common/ConfirmDialog";
 import "./Nav.css";
 import { categories } from "../../config/categories";
+import SignIn from "../Signin/Signin";
 
 const Nav = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -13,7 +14,7 @@ const Nav = () => {
   const [showSignOutDialog, setShowSignOutDialog] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const { isAuthenticated, login, logout } = useAuth();
+  const { isAuthenticated, SignIn, logout } = useAuth();
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -146,7 +147,7 @@ const Nav = () => {
                 </button>
               </>
             ) : (
-              <button onClick={login} className="nav-item sign-in-btn">
+              <button onClick={SignIn} className="nav-item sign-in-btn">
                 <i className="fas fa-sign-in-alt"></i>
                 Sign In
               </button>
