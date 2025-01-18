@@ -1,4 +1,4 @@
-// Get related projects based on category and excluding current project
+
 export const getRelatedProjects = (allProjects, currentProject, limit = 3) => {
   if (!currentProject) return [];
 
@@ -13,7 +13,6 @@ export const getRelatedProjects = (allProjects, currentProject, limit = 3) => {
     .slice(0, limit);
 };
 
-// Get featured projects
 export const getFeaturedProjects = (projects, limit = 3) => {
   return [...projects].sort((a, b) => b.progress - a.progress).slice(0, limit);
 };

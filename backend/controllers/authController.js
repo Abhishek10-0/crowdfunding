@@ -6,7 +6,6 @@ const signIn = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Check if the user exists
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(404).json({ message: 'User not found!' });
@@ -18,7 +17,7 @@ const signIn = async (req, res) => {
       return res.status(401).json({ message: 'Invalid Password' });
     }
 
-    // Generate a JWT token
+ 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
     res.status(200).json({

@@ -31,7 +31,6 @@ export const categories = [
   },
 ];
 
-// Helper function to get all categories including subcategories
 export const getAllCategories = () => {
   const allCategories = [];
   categories.forEach((category) => {
@@ -41,7 +40,7 @@ export const getAllCategories = () => {
   return allCategories;
 };
 
-// Helper function to get category icon
+
 export const getCategoryIcon = (categoryName) => {
   const category = categories.find(
     (cat) =>

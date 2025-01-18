@@ -41,13 +41,13 @@ const Payment = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Update project progress
+ 
     updateProjectProgress(project.id, parseFloat(paymentDetails.amount));
 
-    // Show success message
+    
     alert(`Successfully invested £${paymentDetails.amount} in ${project.name}`);
 
-    // Navigate back to home
+   
     navigate("/");
   };
 

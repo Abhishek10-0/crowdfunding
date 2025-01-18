@@ -11,12 +11,11 @@ const Categories = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Filter projects for this category
+ 
   const categoryProjects = projects.filter(
     (project) => project.category.toLowerCase() === category.toLowerCase()
   );
 
-  // Get total investment stats for this category
   const categoryStats = categoryProjects.reduce(
     (acc, project) => {
       acc.totalRaised += parseFloat(project.raised.replace(/[^0-9.-]+/g, ""));
@@ -31,14 +30,13 @@ const Categories = () => {
     categoryStats.averageProgress /= categoryProjects.length;
   }
 
-  // Filter projects by search query
   const filteredProjects = categoryProjects.filter((project) =>
     project.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
     <div className="categories-page">
-      {/* Category Overview Section */}
+    
       <div className="category-overview">
         <h1>{category} Projects</h1>
         <div className="category-stats">
@@ -61,7 +59,7 @@ const Categories = () => {
         </div>
       </div>
 
-      {/* Search Section */}
+    
       <div className="category-search">
         <div className="search-box">
           <i className="fas fa-search search-icon"></i>
@@ -79,7 +77,7 @@ const Categories = () => {
         </div>
       </div>
 
-      {/* Projects Grid */}
+    
       <div className="projects-section">
         {filteredProjects.length > 0 ? (
           <div className="projects-grid">

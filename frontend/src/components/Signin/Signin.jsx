@@ -6,36 +6,33 @@ const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const navigate = useNavigate(); // For navigation
-
+  const navigate = useNavigate();
   const handleSignIn = async (e) => {
-    e.preventDefault(); // Prevent the default form submission behavior
-  
+    e.preventDefault(); 
     try {
       const response = await axios.post('http://localhost:5001/api/users/signin', {
         email,
         password,
       });
   
-      // Log response for debugging purposes
+     
       console.log('Login Response:', response);
   
-      // Save the JWT token in localStorage
+  
       localStorage.setItem('token', response.data.token);
   
-      // Show success message
+   
       alert('Login Successful!');
   
-      // Redirect the user to the home page after successful login
+
       navigate('/home');
     } catch (err) {
-      // Log the full error object for debugging purposes
+     
       console.error('Sign-In Error:', err);
   
-      // Check if error response is present
+     
       const errorMessage = err.response?.data?.message || 'Something went wrong!';
       
-      // Set the error message to display in the UI
       setError(errorMessage);
     }
   };

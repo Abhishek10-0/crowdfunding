@@ -8,7 +8,7 @@ import {
 } from "../../utils/projectUtils";
 import ProjectSection from "../common/ProjectSection";
 import FeaturedProjectCard from "../common/FeaturedProjectCard";
-import SignIn from "../Signin/Signin";
+// import SignIn from "../Signin/Signin";
 import SignUp from "../Signup/Signup";
 
 const Home = () => {

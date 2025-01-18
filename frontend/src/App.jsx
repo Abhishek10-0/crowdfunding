@@ -11,7 +11,9 @@ import WhyInvestSection from "./components/common/WhyInvestSection";
 import JoinCommunitySection from "./components/common/JoinCommunitySection";
 import "./App.css";
 import SignUp from "./components/Signup/Signup"; 
-import SignIn from "./components/Signin/Signin";
+import SignIn from "./components/SignIn/SignIn";
+
+
 function App() {
   return (
     <Router>
@@ -22,7 +24,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
-              <Route path="/create-project" element={<CreateProject />} />
+              
               <Route path="/payment" element={<Payment />} />
               <Route path="/category/:category" element={<Categories />} />
               <Route path="/signup" element={<SignUp />} /> 

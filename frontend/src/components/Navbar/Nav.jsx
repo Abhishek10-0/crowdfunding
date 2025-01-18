@@ -4,7 +4,7 @@ import { useAuth } from "../../context/AuthContext";
 import ConfirmDialog from "../common/ConfirmDialog";
 import "./Nav.css";
 import { categories } from "../../config/categories";
-import SignIn from "../Signin/Signin";
+import SignIn from "../SignIn/SignIn";
 
 const Nav = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -41,6 +41,10 @@ const Nav = () => {
     logout();
     setShowSignOutDialog(false);
     navigate("/");
+  };
+
+  const signin = () => {
+    navigate("/signin");
   };
 
   return (
@@ -147,7 +151,7 @@ const Nav = () => {
                 </button>
               </>
             ) : (
-              <button onClick={SignIn} className="nav-item sign-in-btn">
+              <button onClick={signin} className="nav-item sign-in-btn">
                 <i className="fas fa-sign-in-alt"></i>
                 Sign In
               </button>

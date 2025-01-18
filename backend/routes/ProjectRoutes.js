@@ -3,7 +3,7 @@ const router = express.Router();
 const multer = require('multer');
 const Project = require('../models/Project');
 
-// Configure Multer
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'uploads/');
@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// Create Project with Image
+
 router.post('/', upload.single('image'), async (req, res) => {
   try {
     const { name, duration, description, goal } = req.body;
