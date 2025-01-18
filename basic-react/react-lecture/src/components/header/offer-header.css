@@ -1,0 +1,14 @@
+.offerHeaderMain {
+  display: flex;
+  font-size: 25px;
+  align-items: center;
+  gap: 15px;
+  flex-direction: row;
+  font-weight: 800;
+  color: white;
+  background-color: #101011;
+  justify-content: center;
+}
+.ant-statistic-content-value {
+  color: white;
+}

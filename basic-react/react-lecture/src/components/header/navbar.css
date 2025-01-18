@@ -1,0 +1,30 @@
+.navbarMain {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px;
+}
+.navbar-link{
+    display: flex
+    ;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+    
+}
+.navbar-link a{
+    all: unset;
+    color: black;
+    font-weight: 600;
+    cursor: pointer;
+}
+.navbar-logo {
+    margin-left: -11rem;
+    color: red;
+}
+.navbar-user-info{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap:25px;
+}

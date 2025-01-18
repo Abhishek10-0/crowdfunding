@@ -1,0 +1,27 @@
+.collecionCardMain{
+    margin-top: 25px;
+    margin-left: 25px;
+    margin-right: 25px;
+    cursor: pointer;
+   
+}
+ .collecionCardMain-img{
+  
+    height: 330px;
+    width: 236px;
+    border-radius: 10px;
+   
+}
+.collecionCardMain-title{
+margin-top: 20px;
+font-size: 30px;
+font-weight: 700;
+}
+.collecionCardMain-subtitle{
+opacity: 0.6;
+}
+.collecionCardMain-price{
+font-weight: 700;
+font-size: 18px;
+margin-top: 20px;
+}
