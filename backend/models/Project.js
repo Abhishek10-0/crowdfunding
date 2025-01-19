@@ -24,7 +24,7 @@ const projectSchema = new mongoose.Schema({
   duration: { type: Number, required: true },
   description: { type: String, required: true },
   goal: { type: Number, required: true },
-  image: { type: String, required: true }, // Image path
+  image: { type: String, required: true }, 
 }, { timestamps: true });
 
 module.exports = mongoose.model('Project', projectSchema);

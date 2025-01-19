@@ -1,100 +1,173 @@
 import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { useProjects } from "../../context/ProjectContext";
-import ProjectSection from "../common/ProjectSection";
-import ProjectCard from "../common/ProjectCard";
-import "./Categories.css";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import ConfirmDialog from "../common/ConfirmDialog";
+import "./Nav.css";
+import { categories } from "../../config/categories";
+import SignIn from "../SignIn/SignIn";
 
-const Categories = () => {
-  const { category } = useParams();
-  const { projects } = useProjects();
-  const navigate = useNavigate();
+const Nav = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [showSignOutDialog, setShowSignOutDialog] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { isAuthenticated, SignIn, logout } = useAuth();
 
- 
-  const categoryProjects = projects.filter(
-    (project) => project.category.toLowerCase() === category.toLowerCase()
-  );
+  const handleSearch = (e) => {
+    e.preventDefault();
+    console.log("Searching for:", searchQuery);
+  };
 
-  const categoryStats = categoryProjects.reduce(
-    (acc, project) => {
-      acc.totalRaised += parseFloat(project.raised.replace(/[^0-9.-]+/g, ""));
-      acc.totalInvestors += project.investors || 0;
-      acc.averageProgress += project.progress;
-      return acc;
-    },
-    { totalRaised: 0, totalInvestors: 0, averageProgress: 0 }
-  );
+  const handleCategorySelect = async (category) => {
+    setIsLoading(true);
+    try {
+      setSelectedCategory(category.name);
+      setIsDropdownOpen(false);
+      await navigate(`/category/${category.name.toLowerCase()}`);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-  if (categoryProjects.length > 0) {
-    categoryStats.averageProgress /= categoryProjects.length;
-  }
+  const handleSignOutClick = (e) => {
+    e.preventDefault();
+    setShowSignOutDialog(true);
+  };
 
-  const filteredProjects = categoryProjects.filter((project) =>
-    project.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const handleConfirmSignOut = () => {
+    logout();
+    setShowSignOutDialog(false);
+    navigate("/");
+  };
+
+  const signin = () => {
+    navigate("/signin");
+  };
 
   return (
-    <div className="categories-page">
-    
-      <div className="category-overview">
-        <h1>{category} Projects</h1>
-        <div className="category-stats">
-          <div className="stat-card">
-            <h3>£{categoryStats.totalRaised.toLocaleString()}</h3>
-            <p>Total Raised</p>
-          </div>
-          <div className="stat-card">
-            <h3>{categoryProjects.length}</h3>
-            <p>Active Projects</p>
-          </div>
-          <div className="stat-card">
-            <h3>{categoryStats.totalInvestors.toLocaleString()}</h3>
-            <p>Total Investors</p>
-          </div>
-          <div className="stat-card">
-            <h3>{categoryStats.averageProgress.toFixed(1)}%</h3>
-            <p>Average Progress</p>
+    <>
+      <nav className="navbar">
+        <div className="nav-left">
+          <Link to="/home" className="nav-logo">
+            CrowdFund
+          </Link>
+          <div className="search-container">
+            <form onSubmit={handleSearch}>
+              <input
+                type="text"
+                placeholder="Search fundraisers..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="search-input"
+              />
+              <button type="submit" className="search-button">
+                <i className="fas fa-search"></i>
+              </button>
+            </form>
           </div>
         </div>
-      </div>
 
-    
-      <div className="category-search">
-        <div className="search-box">
-          <i className="fas fa-search search-icon"></i>
-          <input
-            type="text"
-            placeholder={`Search ${category} projects...`}
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          {searchQuery && (
-            <button className="clear-search" onClick={() => setSearchQuery("")}>
-              <i className="fas fa-times"></i>
+        <div className="nav-menu">
+          <Link
+            to="/home"
+            className={`nav-item ${location.pathname === "/" ? "active" : ""}`}
+          >
+            Home
+          </Link>
+          <div
+            className="nav-dropdown"
+            onMouseEnter={() => setIsDropdownOpen(true)}
+            onMouseLeave={() => setIsDropdownOpen(false)}
+          >
+            <button
+              className={`nav-item dropdown-trigger ${
+                selectedCategory ? "active" : ""
+              }`}
+            >
+              {selectedCategory || "Categories"}{" "}
+              <i className="fas fa-chevron-down"></i>
             </button>
-          )}
-        </div>
-      </div>
+            {isDropdownOpen && (
+              <div className="dropdown-content">
+                {isLoading ? (
+                  <div className="dropdown-loading">
+                    <i className="fas fa-spinner"></i>
+                    Loading categories...
+                  </div>
+                ) : (
+                  categories.map((category) => (
+                    <div key={category.name} className="category-group">
+                      <div
+                        className="category-main"
+                        onClick={() => handleCategorySelect(category)}
+                      >
+                        <i className={category.icon}></i>
+                        <span>{category.name}</span>
+                      </div>
+                      <div className="subcategories">
+                        {category.subcategories.map((sub) => (
+                          <div
+                            key={sub}
+                            className="subcategory"
+                            onClick={() => handleCategorySelect({ name: sub })}
+                          >
+                            {sub}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            )}
+          </div>
+          <Link
+            to="/about"
+            className={`nav-item ${
+              location.pathname === "/about" ? "active" : ""
+            }`}
+          >
+            About
+          </Link>
 
-    
-      <div className="projects-section">
-        {filteredProjects.length > 0 ? (
-          <div className="projects-grid">
-            {filteredProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
+          <div className="auth-buttons">
+            {isAuthenticated ? (
+              <>
+                <Link
+                  to="/create-project"
+                  className="nav-item create-project-btn"
+                >
+                  <i className="fas fa-plus"></i> Create Project
+                </Link>
+                <button
+                  className="nav-item sign-out-btn"
+                  onClick={handleSignOutClick}
+                >
+                  <i className="fas fa-sign-out-alt"></i>
+                  Sign Out
+                </button>
+              </>
+            ) : (
+              <button onClick={signin} className="nav-item sign-in-btn">
+                <i className="fas fa-sign-in-alt"></i>
+                Sign In
+              </button>
+            )}
           </div>
-        ) : (
-          <div className="no-results">
-            <i className="fas fa-search"></i>
-            <h3>No projects found</h3>
-            <p>Try adjusting your search terms</p>
-          </div>
-        )}
-      </div>
-    </div>
+        </div>
+      </nav>
+
+      <ConfirmDialog
+        isOpen={showSignOutDialog}
+        message="Are you sure you want to sign out?"
+        onConfirm={handleConfirmSignOut}
+        onCancel={() => setShowSignOutDialog(false)}
+      />
+    </>
   );
 };
 
-export default Categories;
+export default Nav;
