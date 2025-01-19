@@ -34,24 +34,40 @@ mongoose
   .catch((err) => console.log('MongoDB connection error:', err));
 
 
-app.post('/api/users/signup', async (req, res) => {
-  const { name, email, password } = req.body;
+
+app.post('/api/users/signin', async (req, res) => {
+  console.log('Sign-In request received');
+  const { email, password } = req.body;
+  console.log('Email:', email, 'Password:', password); 
 
   try {
- 
-    const hashedPassword = await bcrypt.hash(password, 10);
 
+    const user = await User.findOne({ email });
+    console.log(user); 
 
-    const newUser = new User({ name, email, password: hashedPassword });
-    await newUser.save();
+    if (!user) {
+      return res.status(404).json({ message: 'User not found!' });
+    }
 
-    res.status(201).json({ message: 'User registered successfully', user: newUser });
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    console.log('Password validation:', isPasswordValid); 
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: 'Invalid credentials!' });
+    }
+
+    
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+    return res.status(200).json({
+      message: 'Sign-in successful!',
+      token,
+      user: { id: user._id, email: user.email, name: user.name },
+    });
   } catch (error) {
-    res.status(400).json({ error: 'User registration failed', details: error.message });
+    console.error('Error in Sign-In:', error); // Log error details
+    return res.status(500).json({ message: 'Something went wrong!', details: error.message });
   }
 });
-
-
 
 
 const storage = multer.diskStorage({
